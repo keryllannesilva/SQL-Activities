@@ -70,8 +70,11 @@ a) Utilize a coluna de Status para filtrar a tabela e trazer apenas as lojas que
 funcionando.
 b) Agora imagine que essa coluna de Status não existe na sua tabela. Qual seria a outra forma
 que você teria de descobrir quais são as lojas que não estão mais funcionando?*/
+select * from DimStore
+where Status = 'On'
 
-
+select * from Dimstore
+where CloseDate = 'NULL'
 
 
 /*
@@ -81,27 +84,44 @@ CATEGORIA 1: De 1 a 20 funcionários -> 1 máquina de café
 CATEGORIA 2: De 21 a 50 funcionários -> 2 máquinas de café
 CATEGORIA 3: Acima de 51 funcionários -> 3 máquinas de café
 Identifique, para cada caso, quais são as lojas de cada uma das 3 categorias acima (basta fazer
-uma verificação).
+uma verificação).*/
+ Select * from DimStore
+ where EmployeeCount <=20
 
+ Select * from DimStore
+ where EmployeeCount >20 AND EmployeeCount <=50
 
-
-
-
+ Select * from DimStore
+ where EmployeeCount >50
+ 
 /*
 8. A empresa decidiu que todas as televisões de LCD receberão um super desconto no próximo
 mês. O seu trabalho é fazer uma consulta à tabela DimProduct e retornar os ID’s, Nomes e
 Preços de todos os produtos LCD existentes.*/
-
+SELECT 
+	ProductKey,
+	ProductName,
+	UnitPrice
+from DimProduct
+where ProductDescription like '%LCD%'
 
 
 /*
 9. Faça uma lista com todos os produtos das cores: Green, Orange, Black, Silver e Pink. Estes
 produtos devem ser exclusivamente das marcas: Contoso, Litware e Fabrikam.*/
-
-
-
+SELECT * 
+FROM DimProduct
+WHERE COLORNAME IN ('Green', 'Orange', 'Black', 'Silver', 'Pink')
+and BrandName IN ('Contoso', 'Litware', 'Fabrikam')
 
 /*
 10. A empresa possui 16 produtos da marca Contoso, da cor Silver e com um UnitPrice entre 10 e
 30. Descubra quais são esses produtos e ordene o resultado em ordem decrescente de acordo
 com o preço (UnitPrice).*/
+
+select 
+	ProductName,
+	ColorName,
+	UnitPrice
+from DimProduct
+WHERE COLORNAME IN ('Silver') AND BRANDNAME IN ('Contoso') AND UNITPRICE  BETWEEN 10 AND 30
