@@ -34,7 +34,13 @@ select top(1) *
 from DimStore
 order by (EmployeeCount) desc
 
+select
+min(EmployeeCount)
+from DimStore
 
+select top(1) *
+from DimStore
+order by (EmployeeCount) asc
 
 
 /*
@@ -43,9 +49,31 @@ total de funcionários do sexo Masculino e do sexo Feminino.
 a) Descubra essas duas informações utilizando o SQL.
 b) O funcionário e a funcionária mais antigos receberão uma homenagem. Descubra as
 seguintes informações de cada um deles: Nome, E-mail, Data de Contratação.*/
+ select * from DimEmployee
+ select count (FirstName)
+ from DimEmployee
+ where Gender = 'F'
 
+ select count (FirstName)
+ from DimEmployee
+ where Gender = 'M'
 
+ select top (1) 
+ FirstName as Nome,
+ EmailAddress as Email,
+ HireDate as Contratação
+ from DimEmployee
+ Where Gender = 'F'
+ order by (HireDate) asc
 
+  select top (1) 
+ FirstName as Nome,
+ EmailAddress as Email,
+ HireDate as Contratação
+ from DimEmployee
+ Where Gender = 'M'
+ order by (HireDate) asc
+ 
 /*
 5. Agora você precisa fazer uma análise dos produtos. Será necessário descobrir as seguintes
 informações:
@@ -53,3 +81,9 @@ a) Quantidade distinta de cores de produtos.
 b) Quantidade distinta de marcas
 c) Quantidade distinta de classes de produto
 Para simplificar, você pode fazer isso em uma mesma consulta.*/
+
+select 
+count (distinct ColorName) as 'cores',
+count (distinct BrandName) as 'marcas',
+count (distinct ClassName) as 'classes'
+from DimProduct
